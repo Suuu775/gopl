@@ -10,7 +10,7 @@ import (
 
 func Findlinks2() {
 	for _, url := range os.Args[1:] {
-		links, err := findLinks(url)
+		links, err := Extract(url)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "findlinks2: %v\n", err)
 			continue
@@ -21,9 +21,7 @@ func Findlinks2() {
 	}
 }
 
-// findLinks performs an HTTP GET request for url, parses the
-// response as HTML, and extracts and returns the links.
-func findLinks(url string) ([]string, error) {
+func Extract(url string) ([]string, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
